@@ -7,51 +7,98 @@ using System.Windows.Forms;
 
 namespace NeuralNetwork
 {
-    class Car
+    public class Car
     {
+        /// <summary>
+        /// Модель
+        /// </summary>
+        public string Name { get; set; }
         /// <summary>
         /// Масса
         /// </summary>
-        public float Weight { get; set; }
+        public double Weight { get; set; }
 
         /// <summary>
         /// Грузоподъемность
         /// </summary>
-        public float Capacity { get; set; }
+        public double Capacity { get; set; }
 
         /// <summary>
         /// Привод
         /// </summary>
-        public float Drive { get; set; }
+        public double Drive { get; set; }
 
         /// <summary>
         /// Ширина
         /// </summary>
-        public float Width { get; set; }
+        public double Width { get; set; }
 
         /// <summary>
         /// Высота
         /// </summary>
-        public float Height { get; set; }
+        public double Height { get; set; }
 
         /// <summary>
         /// Длина
         /// </summary>
-        public float Length { get; set; }
+        public double Length { get; set; }
 
         /// <summary>
         /// Клиренс
         /// </summary>
-        public float Clearance { get; set; }
+        public double Clearance { get; set; }
 
         /// <summary>
         /// Количество лошадинных сил
         /// </summary>
-        public float Power { get; set; }
+        public double Power { get; set; }
 
         /// <summary>
         /// Количество пассажиров
         /// </summary>
-        public float CountOfPassengers { get; set; }
+        public double Passengers { get; set; }
+
+        /// <summary>
+        /// Тип
+        /// </summary>
+        public int Type { get; set; }
+
+
+
+        public Car(string name, double weight, double capacity, double drive, double width, double height, double length, double clearance, double power, double cot, int type)
+        {
+            Name = name;
+            Weight = weight;
+            Capacity = capacity;
+            Drive = drive;
+            Width = width;
+            Height = height;
+            Length = length;
+            Clearance = clearance;
+            Power = power;
+            Passengers = cot;
+            Type = type;
+        }
+
+
+        public Car(string name, double weight, double capacity, double drive, double width, double height, double length, double clearance, double power, double cot)
+        {
+            Name = name;
+            Weight = weight;
+            Capacity = capacity;
+            Drive = drive;
+            Width = width;
+            Height = height;
+            Length = length;
+            Clearance = clearance;
+            Power = power;
+            Passengers = cot;
+            Type = -1;
+        }
+
+        public Car()
+        {
+        }
+
     }
 }
