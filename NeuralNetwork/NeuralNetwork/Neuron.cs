@@ -56,7 +56,7 @@ namespace NeuralNetwork
         /// Вычисляем выходное значение нейрона
         /// </summary>
         /// <param name="input">Входные параметры нейрона</param>
-        /// <returns></returns>
+        /// <returns>Выходное значение нейрона</returns>
         public double Compute(double[] input)
         {
             double sum = 0.0;

@@ -5,14 +5,24 @@ namespace NeuralNetwork
 {
     class DataNormalizer
     {
+        /// <summary>
+        /// Список авто
+        /// </summary>
         private List<Car> Cars { get; set; }
 
-
+        /// <summary>
+        /// Инициализация нормализатора
+        /// </summary>
+        /// <param name="cars">Список авто</param>
         public DataNormalizer(List<Car> cars)
         {
             Cars = cars;
         }
 
+        /// <summary>
+        /// Нормализация всех значений для всех авто
+        /// </summary>
+        /// <returns>Нормализованный список авто</returns>
         public List<Car> Normalize()
         {
             double maxWeight = Cars.Max(obj => obj.Weight);

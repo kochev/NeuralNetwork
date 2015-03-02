@@ -25,7 +25,12 @@
         /// </summary>
         public Layer[] Layers { get; set; }
 
-
+        /// <summary>
+        /// Инициализация сети
+        /// </summary>
+        /// <param name="layers">Количество слоев сети</param>
+        /// <param name="inputs">Количество входных параметров для нейрона</param>
+        /// <param name="neurons">Количество нейронов в слое</param>
         public Network(int layers, int inputs, int neurons)
         {
             InputsCount = inputs;

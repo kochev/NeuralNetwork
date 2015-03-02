@@ -57,7 +57,20 @@
         public int Type { get; set; }
 
 
-
+        /// <summary>
+        /// Инициализация авто
+        /// </summary>
+        /// <param name="name">Марка</param>
+        /// <param name="weight">Вес</param>
+        /// <param name="capacity">Грузоподъемность</param>
+        /// <param name="drive">Привод</param>
+        /// <param name="width">Ширина</param>
+        /// <param name="height">Высота</param>
+        /// <param name="length">Длина</param>
+        /// <param name="clearance">Клиренс</param>
+        /// <param name="power">Мощность</param>
+        /// <param name="cot">Пассажиры</param>
+        /// <param name="type">Тип</param>
         public Car(string name, double weight, double capacity, double drive, double width, double height, double length, double clearance, double power, double cot, int type)
         {
             Name = name;
@@ -73,7 +86,19 @@
             Type = type;
         }
 
-
+        /// <summary>
+        /// Инициализация авто
+        /// </summary>
+        /// <param name="name">Марка</param>
+        /// <param name="weight">Вес</param>
+        /// <param name="capacity">Грузоподъемность</param>
+        /// <param name="drive">Привод</param>
+        /// <param name="width">Ширина</param>
+        /// <param name="height">Высота</param>
+        /// <param name="length">Длина</param>
+        /// <param name="clearance">Клиренс</param>
+        /// <param name="power">Мощность</param>
+        /// <param name="cot">Пассажиры</param>
         public Car(string name, double weight, double capacity, double drive, double width, double height, double length, double clearance, double power, double cot)
         {
             Name = name;
