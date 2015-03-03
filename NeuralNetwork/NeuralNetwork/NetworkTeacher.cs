@@ -60,11 +60,9 @@ namespace NeuralNetwork
                     //пересчитаем его веса
                     for (int j = 0; j < neuron.InputsCount; j++)
                     {
-                        neuron.Weights[j] += SpeedOfLearning * err * inputs[j];
+                        neuron.Weights[j] = neuron.Weights[j] + inputs[j] * err * SpeedOfLearning;
                     }
 
-                    //обновим пороговое значение нейрона
-                    neuron.Threshold += SpeedOfLearning * err;
 
                     //учитываем ошибку(по модулю)
                     error += Math.Abs(err);

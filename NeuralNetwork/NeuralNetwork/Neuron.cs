@@ -22,12 +22,6 @@ namespace NeuralNetwork
 
 
         /// <summary>
-        /// Пороговое значение
-        /// </summary>
-        public double Threshold { get; set; }
-
-
-        /// <summary>
         /// Инициализация нейрона
         /// </summary>
         /// <param name="inputs">Количество входных параметров</param>
@@ -49,7 +43,6 @@ namespace NeuralNetwork
             {
                 Weights[i] = rand.NextDouble();
             }
-            Threshold = rand.NextDouble();
         }
 
         /// <summary>
@@ -70,9 +63,9 @@ namespace NeuralNetwork
             {
                 sum += Weights[i] * inputs[i];
             }
-            sum += Threshold;
+            //sum += Threshold;
 
-            //TODO: Output: посчитать с помощью функции активации?
+            Output = new ThresholdActivationFunction(0.8).Function(sum);
             return Output;
         }
     }
