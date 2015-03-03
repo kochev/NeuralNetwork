@@ -62,10 +62,11 @@
         /// <returns>Выходной вектор слоя</returns>
         public double[] Compute(double[] input)
         {
-            // считаем каждый нейрон слоя
+            //считаем каждый нейрон слоя
             for (int i = 0; i < NeuronsCount; i++)
+            {
                 Outputs[i] = Neurons[i].Compute(input);
-
+            }
             return Outputs;
         }
 

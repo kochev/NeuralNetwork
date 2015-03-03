@@ -43,7 +43,7 @@ namespace NeuralNetwork
         /// </summary>
         public void Randomize()
         {
-            Random rand = new Random((int)DateTime.Now.Ticks);
+            Random rand = new Random();
 
             for (int i = 0; i < InputsCount; i++)
             {
@@ -55,24 +55,24 @@ namespace NeuralNetwork
         /// <summary>
         /// Вычисляем выходное значение нейрона
         /// </summary>
-        /// <param name="input">Входные параметры нейрона</param>
+        /// <param name="inputs">Входные параметры нейрона</param>
         /// <returns>Выходное значение нейрона</returns>
-        public double Compute(double[] input)
+        public double Compute(double[] inputs)
         {
             double sum = 0.0;
-            if (input.Length != InputsCount)
+            if (inputs.Length != InputsCount)
             {
                 throw new Exception("Количество входных параметров задано некорректно!");
             }
 
-            // считаем взвешанную сумму входных значений
+            //считаем взвешанную сумму входных значений
             for (int i = 0; i < InputsCount; i++)
             {
-                sum += Weights[i] * input[i];
+                sum += Weights[i] * inputs[i];
             }
             sum += Threshold;
 
-            //TODO: Outputs: посчитать с помощью функции активации?
+            //TODO: Output: посчитать с помощью функции активации?
             return Output;
         }
     }

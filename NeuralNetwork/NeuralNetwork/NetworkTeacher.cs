@@ -37,18 +37,57 @@ namespace NeuralNetwork
         /// </summary>
         /// <param name="inputs">Входные параметры</param>
         /// <param name="outputs">Желаемые выходные парамеры</param>
-        /// <returns>Абсолютную погрешность - разность между реальным выходом сети и желаемым выходом</returns>
-        public double Teach(double[] inputs, double outputs)
+        /// <returns>Абсолютная погрешность - разность между реальным выходом сети и желаемым выходом</returns>
+        private double Teach(double[] inputs, double[] outputs)
         {
-            //разность между реальным сети выходом и желаемым выходом
+            //разность между реальным выходом сети и желаемым выходом
             double error = 0.0;
 
             Layer layer = _network.Layers[0];
 
-            // посчитанный сетью выход
+            //посчитанный сетью выход
             double[] networkOutput = _network.Compute(inputs);
 
+            for (int i = 0; i < layer.NeuronsCount; i++)
+            {
+                double err = outputs[i] - networkOutput[i];
+
+                if (err > -0.00001 && err < 0.00001)
+                {
+                    //возьмем нейрон который дал нехороший ответ
+                    Neuron neuron = layer.Neurons[i];
+
+                    //пересчитаем его веса
+                    for (int j = 0; j < neuron.InputsCount; j++)
+                    {
+                        neuron.Weights[j] += SpeedOfLearning * err * inputs[j];
+                    }
+
+                    //обновим пороговое значение нейрона
+                    neuron.Threshold += SpeedOfLearning * err;
+
+                    //учитываем ошибку(по модулю)
+                    error += Math.Abs(err);
+                }
+            }
+            return error;
+        }
+
+
+        /// <summary>
+        /// Обучение на множестве примеров
+        /// </summary>
+        /// <param name="cars">Авто для обучения сети</param>
+        /// <returns>Суммарная ошибка при обучении</returns>
+        public double Teach(List<Car> cars)
+        {
+            double error = 0.0;
+
+            //TODO: для всех авто обучить в вышеописанном методе
             return error;
         }
     }
+
+
+
 }
