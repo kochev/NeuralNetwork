@@ -40,7 +40,7 @@ namespace NeuralNetwork
         /// <returns>Абсолютная погрешность - разность между реальным выходом сети и желаемым выходом</returns>
         private double Teach(double[] inputs, double[] outputs)
         {
-            //разность между реальным выходом сети и желаемым выходом
+            //суммарная ошибка при обучении
             double error = 0.0;
 
             Layer layer = _network.Layers[0];
@@ -50,9 +50,10 @@ namespace NeuralNetwork
 
             for (int i = 0; i < layer.NeuronsCount; i++)
             {
+                //разность между реальным выходом сети и желаемым выходом
                 double err = outputs[i] - networkOutput[i];
 
-                if (err > -0.00001 && err < 0.00001)
+                if (err > -0.05 && err < 0.05)
                 {
                     //возьмем нейрон который дал нехороший ответ
                     Neuron neuron = layer.Neurons[i];
@@ -62,8 +63,6 @@ namespace NeuralNetwork
                     {
                         neuron.Weights[j] = neuron.Weights[j] + inputs[j] * err * SpeedOfLearning;
                     }
-
-
                     //учитываем ошибку(по модулю)
                     error += Math.Abs(err);
                 }
@@ -80,6 +79,12 @@ namespace NeuralNetwork
         public double Teach(List<Car> cars)
         {
             double error = 0.0;
+            double[][] inputs;
+            double[][] outpus;
+            foreach (var car in cars)
+            {
+
+            }
 
             //TODO: для всех авто обучить в вышеописанном методе
             return error;
