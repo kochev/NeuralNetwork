@@ -61,7 +61,7 @@ namespace NeuralNetwork
                     //пересчитаем его веса
                     for (int j = 0; j < neuron.InputsCount; j++)
                     {
-                        neuron.Weights[j] = neuron.Weights[j] + inputs[j] * err * SpeedOfLearning;
+                        neuron.Weights[j] += inputs[j] * err * SpeedOfLearning;
                     }
                     //учитываем ошибку(по модулю)
                     error += Math.Abs(err);
@@ -76,17 +76,43 @@ namespace NeuralNetwork
         /// </summary>
         /// <param name="cars">Авто для обучения сети</param>
         /// <returns>Суммарная ошибка при обучении</returns>
-        public double Teach(List<Car> cars)
+        public double Teach(List<Car> c)
         {
+            List<Car> cars = new DataNormalizer(c).Normalize();
             double error = 0.0;
-            double[][] inputs;
-            double[][] outpus;
             foreach (var car in cars)
             {
+                double[] outputs = new double[_network.Layers[0].NeuronsCount];
+                double[] inputs = new double[9];
+                inputs[0] = car.Weight;
+                inputs[1] = car.Capacity;
+                inputs[2] = car.Drive;
+                inputs[3] = car.Width;
+                inputs[4] = car.Length;
+                inputs[5] = car.Height;
+                inputs[6] = car.Clearance;
+                inputs[7] = car.Power;
+                inputs[8] = car.Passengers;
 
+                switch (car.Type)
+                {
+                    case 0:
+                        outputs = new[] { 1d, 0d, 0d, 0d };
+                        break;
+                    case 1:
+                        outputs = new[] { 0d, 1d, 0d, 0d };
+                        break;
+                    case 2:
+                        outputs = new[] { 0d, 0d, 1d, 0d };
+                        break;
+                    case 3:
+                        outputs = new[] { 0d, 0d, 0d, 1d };
+                        break;
+
+                }
+
+                error += Teach(inputs, outputs);
             }
-
-            //TODO: для всех авто обучить в вышеописанном методе
             return error;
         }
     }
