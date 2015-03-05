@@ -59,12 +59,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.CarNametextBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.TeachButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.CarsChekedBox = new System.Windows.Forms.CheckedListBox();
             this.GetClassButton = new System.Windows.Forms.Button();
+            this.SelectedFile = new System.Windows.Forms.ComboBox();
+            this.ResultTeachingLabel = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CarTable)).BeginInit();
@@ -90,14 +92,17 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.SelectedFile);
             this.tabPage1.Controls.Add(this.CarTable);
             this.tabPage1.Controls.Add(this.panel1);
+            this.tabPage1.Controls.Add(this.LoadButton);
+            this.tabPage1.Controls.Add(this.SaveButton);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1084, 700);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Обучение сети";
+            this.tabPage1.Text = "Стартовые параметры";
             // 
             // CarTable
             // 
@@ -113,7 +118,7 @@
             this.CarTable.Location = new System.Drawing.Point(337, 22);
             this.CarTable.Name = "CarTable";
             this.CarTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.CarTable.Size = new System.Drawing.Size(734, 668);
+            this.CarTable.Size = new System.Drawing.Size(734, 600);
             this.CarTable.TabIndex = 1;
             // 
             // panel1
@@ -121,8 +126,6 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.Normalize);
             this.panel1.Controls.Add(this.NotNormalize);
-            this.panel1.Controls.Add(this.LoadButton);
-            this.panel1.Controls.Add(this.SaveButton);
             this.panel1.Controls.Add(this.AddCarButton);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.TypeAutoComboBox);
@@ -147,7 +150,7 @@
             this.panel1.Controls.Add(this.CarNametextBox);
             this.panel1.Location = new System.Drawing.Point(17, 21);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(303, 669);
+            this.panel1.Size = new System.Drawing.Size(303, 601);
             this.panel1.TabIndex = 0;
             // 
             // Normalize
@@ -168,29 +171,29 @@
             this.NotNormalize.CheckState = System.Windows.Forms.CheckState.Checked;
             this.NotNormalize.Location = new System.Drawing.Point(14, 541);
             this.NotNormalize.Name = "NotNormalize";
-            this.NotNormalize.Size = new System.Drawing.Size(170, 17);
+            this.NotNormalize.Size = new System.Drawing.Size(165, 17);
             this.NotNormalize.TabIndex = 24;
-            this.NotNormalize.Text = "Данные в нормальном виде";
+            this.NotNormalize.Text = "Данные в \"понятном\" виде";
             this.NotNormalize.UseVisualStyleBackColor = true;
             this.NotNormalize.CheckedChanged += new System.EventHandler(this.NotNormalize_CheckedChanged);
             // 
             // LoadButton
             // 
-            this.LoadButton.Location = new System.Drawing.Point(159, 609);
+            this.LoadButton.Location = new System.Drawing.Point(489, 646);
             this.LoadButton.Name = "LoadButton";
-            this.LoadButton.Size = new System.Drawing.Size(128, 44);
+            this.LoadButton.Size = new System.Drawing.Size(128, 30);
             this.LoadButton.TabIndex = 23;
-            this.LoadButton.Text = "Загрузить";
+            this.LoadButton.Text = "Загрузить из";
             this.LoadButton.UseVisualStyleBackColor = true;
             this.LoadButton.Click += new System.EventHandler(this.LoadButton_Click);
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(14, 609);
+            this.SaveButton.Location = new System.Drawing.Point(337, 646);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(128, 44);
+            this.SaveButton.Size = new System.Drawing.Size(128, 30);
             this.SaveButton.TabIndex = 22;
-            this.SaveButton.Text = "Cохранить";
+            this.SaveButton.Text = "Cохранить в ";
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
@@ -417,9 +420,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.ResultTeachingLabel);
             this.tabPage2.Controls.Add(this.panel2);
-            this.tabPage2.Controls.Add(this.listBox2);
-            this.tabPage2.Controls.Add(this.listBox1);
             this.tabPage2.Controls.Add(this.TeachButton);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
@@ -428,58 +430,79 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Работа с сетью";
             // 
-            // listBox2
-            // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(210, 70);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(165, 420);
-            this.listBox2.TabIndex = 2;
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(37, 70);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(148, 420);
-            this.listBox1.TabIndex = 1;
-            // 
             // TeachButton
             // 
-            this.TeachButton.Location = new System.Drawing.Point(37, 29);
+            this.TeachButton.Location = new System.Drawing.Point(20, 17);
             this.TeachButton.Name = "TeachButton";
-            this.TeachButton.Size = new System.Drawing.Size(148, 23);
+            this.TeachButton.Size = new System.Drawing.Size(166, 46);
             this.TeachButton.TabIndex = 0;
-            this.TeachButton.Text = "Начать обучение";
+            this.TeachButton.Text = "Обучить сеть";
             this.TeachButton.UseVisualStyleBackColor = true;
             this.TeachButton.Click += new System.EventHandler(this.TeachButton_Click);
             // 
             // panel2
             // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.listBox1);
             this.panel2.Controls.Add(this.GetClassButton);
-            this.panel2.Controls.Add(this.checkedListBox1);
-            this.panel2.Location = new System.Drawing.Point(649, 17);
+            this.panel2.Controls.Add(this.CarsChekedBox);
+            this.panel2.Location = new System.Drawing.Point(20, 91);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(413, 662);
+            this.panel2.Size = new System.Drawing.Size(1039, 591);
             this.panel2.TabIndex = 3;
             // 
-            // checkedListBox1
+            // CarsChekedBox
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(14, 12);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(386, 499);
-            this.checkedListBox1.TabIndex = 0;
+            this.CarsChekedBox.CheckOnClick = true;
+            this.CarsChekedBox.FormattingEnabled = true;
+            this.CarsChekedBox.Location = new System.Drawing.Point(14, 27);
+            this.CarsChekedBox.Name = "CarsChekedBox";
+            this.CarsChekedBox.Size = new System.Drawing.Size(386, 484);
+            this.CarsChekedBox.TabIndex = 0;
             // 
             // GetClassButton
             // 
+            this.GetClassButton.Enabled = false;
             this.GetClassButton.Location = new System.Drawing.Point(14, 530);
             this.GetClassButton.Name = "GetClassButton";
-            this.GetClassButton.Size = new System.Drawing.Size(386, 42);
+            this.GetClassButton.Size = new System.Drawing.Size(386, 47);
             this.GetClassButton.TabIndex = 1;
             this.GetClassButton.Text = "Спросить";
             this.GetClassButton.UseVisualStyleBackColor = true;
             this.GetClassButton.Click += new System.EventHandler(this.GetClassButton_Click);
+            // 
+            // SelectedFile
+            // 
+            this.SelectedFile.FormattingEnabled = true;
+            this.SelectedFile.Items.AddRange(new object[] {
+            "Учебная выборка",
+            "Тестовая выборка"});
+            this.SelectedFile.Location = new System.Drawing.Point(633, 652);
+            this.SelectedFile.Name = "SelectedFile";
+            this.SelectedFile.Size = new System.Drawing.Size(438, 21);
+            this.SelectedFile.TabIndex = 24;
+            // 
+            // ResultTeachingLabel
+            // 
+            this.ResultTeachingLabel.AutoSize = true;
+            this.ResultTeachingLabel.Location = new System.Drawing.Point(222, 34);
+            this.ResultTeachingLabel.Name = "ResultTeachingLabel";
+            this.ResultTeachingLabel.Size = new System.Drawing.Size(195, 13);
+            this.ResultTeachingLabel.TabIndex = 4;
+            this.ResultTeachingLabel.Text = "Количество итераций для обучения:  ";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(417, 27);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(365, 550);
+            this.listBox1.TabIndex = 2;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // Form1
             // 
@@ -499,6 +522,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -538,11 +562,13 @@
         private System.Windows.Forms.CheckBox NotNormalize;
         private System.Windows.Forms.CheckBox Normalize;
         private System.Windows.Forms.Button TeachButton;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button GetClassButton;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox CarsChekedBox;
+        private System.Windows.Forms.ComboBox SelectedFile;
+        private System.Windows.Forms.Label ResultTeachingLabel;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
