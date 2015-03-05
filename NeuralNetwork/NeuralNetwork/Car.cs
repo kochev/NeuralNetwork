@@ -114,6 +114,11 @@
             Type = -1;
         }
 
+        public override string ToString()
+        {
+            return Name;
+        }
+
         public Car()
         {
         }

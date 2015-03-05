@@ -21,6 +21,7 @@ namespace NeuralNetwork
         /// <returns>Значение активационной функции</returns>
         public double Function(double x)
         {
+            //return (x >= 0) ? 1 : 0;
             if (x > Threshold)
             {
                 return 1;

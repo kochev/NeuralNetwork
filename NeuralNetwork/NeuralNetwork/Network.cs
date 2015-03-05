@@ -1,4 +1,6 @@
-﻿namespace NeuralNetwork
+﻿using System.Diagnostics;
+
+namespace NeuralNetwork
 {
     class Network
     {
@@ -70,6 +72,7 @@
             foreach (var layer in Layers)
             {
                 Outputs = layer.Compute(input);
+                //Debug.Print(Outputs[0] + "-" + Outputs[1] + "-" + Outputs[2] + "-" + Outputs[3]);
             }
 
             return Outputs;

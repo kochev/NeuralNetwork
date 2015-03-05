@@ -59,10 +59,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.CarNametextBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.TeachButton = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.GetClassButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CarTable)).BeginInit();
             this.panel1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -409,12 +417,69 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.panel2);
+            this.tabPage2.Controls.Add(this.listBox2);
+            this.tabPage2.Controls.Add(this.listBox1);
+            this.tabPage2.Controls.Add(this.TeachButton);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1084, 700);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Работа с сетью";
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Location = new System.Drawing.Point(210, 70);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(165, 420);
+            this.listBox2.TabIndex = 2;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(37, 70);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(148, 420);
+            this.listBox1.TabIndex = 1;
+            // 
+            // TeachButton
+            // 
+            this.TeachButton.Location = new System.Drawing.Point(37, 29);
+            this.TeachButton.Name = "TeachButton";
+            this.TeachButton.Size = new System.Drawing.Size(148, 23);
+            this.TeachButton.TabIndex = 0;
+            this.TeachButton.Text = "Начать обучение";
+            this.TeachButton.UseVisualStyleBackColor = true;
+            this.TeachButton.Click += new System.EventHandler(this.TeachButton_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.GetClassButton);
+            this.panel2.Controls.Add(this.checkedListBox1);
+            this.panel2.Location = new System.Drawing.Point(649, 17);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(413, 662);
+            this.panel2.TabIndex = 3;
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(14, 12);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(386, 499);
+            this.checkedListBox1.TabIndex = 0;
+            // 
+            // GetClassButton
+            // 
+            this.GetClassButton.Location = new System.Drawing.Point(14, 530);
+            this.GetClassButton.Name = "GetClassButton";
+            this.GetClassButton.Size = new System.Drawing.Size(386, 42);
+            this.GetClassButton.TabIndex = 1;
+            this.GetClassButton.Text = "Спросить";
+            this.GetClassButton.UseVisualStyleBackColor = true;
+            this.GetClassButton.Click += new System.EventHandler(this.GetClassButton_Click);
             // 
             // Form1
             // 
@@ -433,6 +498,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.CarTable)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -470,6 +537,12 @@
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.CheckBox NotNormalize;
         private System.Windows.Forms.CheckBox Normalize;
+        private System.Windows.Forms.Button TeachButton;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button GetClassButton;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
     }
 }
 

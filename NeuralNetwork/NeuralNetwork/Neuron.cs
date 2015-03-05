@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace NeuralNetwork
 {
@@ -63,9 +64,10 @@ namespace NeuralNetwork
             {
                 sum += Weights[i] * inputs[i];
             }
+            //Debug.Print(sum.ToString());
             //sum += Threshold;
 
-            Output = new ThresholdActivationFunction(0.8).Function(sum);
+            Output = new ThresholdActivationFunction(0.95).Function(sum);
             return Output;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,7 +54,7 @@ namespace NeuralNetwork
                 //разность между реальным выходом сети и желаемым выходом
                 double err = outputs[i] - networkOutput[i];
 
-                if (err > -0.05 && err < 0.05)
+                if (Math.Abs(err) > 0.05)
                 {
                     //возьмем нейрон который дал нехороший ответ
                     Neuron neuron = layer.Neurons[i];
@@ -63,10 +64,13 @@ namespace NeuralNetwork
                     {
                         neuron.Weights[j] += inputs[j] * err * SpeedOfLearning;
                     }
+
+
                     //учитываем ошибку(по модулю)
                     error += Math.Abs(err);
                 }
             }
+            // Debug.Print("Error:" + error.ToString());
             return error;
         }
 
@@ -83,16 +87,16 @@ namespace NeuralNetwork
             foreach (var car in cars)
             {
                 double[] outputs = new double[_network.Layers[0].NeuronsCount];
-                double[] inputs = new double[9];
-                inputs[0] = car.Weight;
-                inputs[1] = car.Capacity;
-                inputs[2] = car.Drive;
-                inputs[3] = car.Width;
-                inputs[4] = car.Length;
-                inputs[5] = car.Height;
-                inputs[6] = car.Clearance;
-                inputs[7] = car.Power;
-                inputs[8] = car.Passengers;
+                double[] inputs = new double[9] { car.Weight, car.Capacity, car.Drive, car.Width, car.Length, car.Height, car.Clearance, car.Power, car.Passengers };
+                //inputs[0] = car.Weight;
+                //inputs[1] = car.Capacity;
+                //inputs[2] = car.Drive;
+                //inputs[3] = car.Width;
+                //inputs[4] = car.Length;
+                //inputs[5] = car.Height;
+                //inputs[6] = car.Clearance;
+                //inputs[7] = car.Power;
+                //inputs[8] = car.Passengers;
 
                 switch (car.Type)
                 {
