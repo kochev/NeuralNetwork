@@ -54,7 +54,7 @@ namespace NeuralNetwork
                 //разность между реальным выходом сети и желаемым выходом
                 double err = outputs[i] - networkOutput[i];
 
-                if (Math.Abs(err) > 0.05)
+                if (Math.Abs(err) > 0.01)
                 {
                     //возьмем нейрон который дал нехороший ответ
                     Neuron neuron = layer.Neurons[i];
@@ -78,25 +78,16 @@ namespace NeuralNetwork
         /// <summary>
         /// Обучение на множестве примеров
         /// </summary>
-        /// <param name="cars">Авто для обучения сети</param>
+        /// <param name="c">Авто для обучения сети</param>
         /// <returns>Суммарная ошибка при обучении</returns>
-        public double Teach(List<Car> c)
+        public double Teach(List<Car> cars)
         {
-            List<Car> cars = new DataNormalizer(c).Normalize();
+            //List<Car> cars = new DataNormalizer(c).Normalize();
             double error = 0.0;
             foreach (var car in cars)
             {
                 double[] outputs = new double[_network.Layers[0].NeuronsCount];
                 double[] inputs = new double[9] { car.Weight, car.Capacity, car.Drive, car.Width, car.Length, car.Height, car.Clearance, car.Power, car.Passengers };
-                //inputs[0] = car.Weight;
-                //inputs[1] = car.Capacity;
-                //inputs[2] = car.Drive;
-                //inputs[3] = car.Width;
-                //inputs[4] = car.Length;
-                //inputs[5] = car.Height;
-                //inputs[6] = car.Clearance;
-                //inputs[7] = car.Power;
-                //inputs[8] = car.Passengers;
 
                 switch (car.Type)
                 {

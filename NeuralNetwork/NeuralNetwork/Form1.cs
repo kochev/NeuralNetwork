@@ -28,6 +28,7 @@ namespace NeuralNetwork
         {
             try
             {
+                Cars = (List<Car>)_xmlWorker.Deserialize("CarsForStudy.xml", typeof(List<Car>));
                 var weight = Convert.ToDouble(WeightTextBox.Text);
                 var capacity = Convert.ToDouble(CapacityTextBox.Text);
                 var drive = Convert.ToDouble(DriveComboBox.SelectedIndex + 1.0);
@@ -54,36 +55,20 @@ namespace NeuralNetwork
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadButton_Click(null, null);
-            _network = new Network(1, 9, 3);
+            _network = new Network(1, 9, 4);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            if (SelectedFile.SelectedIndex == 0)
-            {
-                _xmlWorker.Serialize(Cars, "CarsForStudy.xml", typeof(List<Car>));
-            }
-            else
-            {
-                _xmlWorker.Serialize(Cars, "CarsForTesting.xml", typeof(List<Car>));
-            }
+            _xmlWorker.Serialize(Cars, "CarsForStudy.xml", typeof(List<Car>));
         }
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
             CarsChekedBox.Items.Clear();
-            if (SelectedFile.SelectedIndex == 0)
-            {
-                Cars = (List<Car>)_xmlWorker.Deserialize("CarsForStudy.xml", typeof(List<Car>));
-            }
-            else if (SelectedFile.SelectedIndex == -1)
-            {
-                Cars = (List<Car>)_xmlWorker.Deserialize("CarsForStudy.xml", typeof(List<Car>));
-            }
-            else
-            {
-                Cars = (List<Car>)_xmlWorker.Deserialize("CarsForTesting.xml", typeof(List<Car>));
-            }
+
+            Cars = (List<Car>)_xmlWorker.Deserialize("CarsForStudy.xml", typeof(List<Car>));
+
             CarTable.DataSource = null;
             CarTable.DataSource = Cars;
             foreach (var car in Cars)
@@ -172,28 +157,32 @@ namespace NeuralNetwork
 
         private void TeachButton_Click(object sender, EventArgs e)
         {
-            backgroundWorker1.RunWorkerAsync();
+            try
+            {
+                GetClassButton.Enabled = false;
+                progressBar1.Value = 0;
+                backgroundWorker1.RunWorkerAsync(trackBar1.Value);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void GetClassButton_Click(object sender, EventArgs e)
         {
             string[] types = new string[4] { "Легковая", "Грузовая", "Внедорожник", "Спортивная" };
             listBox1.Items.Clear();
+            List<Car> normalCars = new DataNormalizer(Cars).Normalize();
             foreach (var index in CarsChekedBox.CheckedIndices)
             {
-                //MessageBox.Show(index.ToString());
-                var car = Cars.ElementAt((int)index);
+                var car = normalCars.ElementAt((int)index);
                 double[] inputs = new double[9] { car.Weight, car.Capacity, car.Drive, car.Width, car.Length, car.Height, car.Clearance, car.Power, car.Passengers };
-                int result = 0;
                 double[] output = _network.Compute(inputs);
                 string resultString = car.Name + ":";
                 for (int i = 0; i < output.Length; i++)
                 {
-                    if (output[i] == 1)
-                    {
-                        result = i;
-                        resultString += " " + types[result];
-                    }
+                    resultString += " " + types[i] + "(" + output[i] * 100 + " %)";
                 }
                 listBox1.Items.Add(resultString);
             }
@@ -201,23 +190,51 @@ namespace NeuralNetwork
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
+            iterations = 0;
+            NetworkTeacher networkTeacher = new NetworkTeacher(_network, 0.00001);
 
-            NetworkTeacher networkTeacher = new NetworkTeacher(_network, 0.000001);
-           
-            double err = networkTeacher.Teach(Cars);
-
-            while (err > 1.0)
+            List<Car> carsForTeaching = new List<Car>();
+            Cars = new DataNormalizer(Cars).Normalize();
+            foreach (var index in CarsChekedBox.CheckedIndices)
             {
-                err = networkTeacher.Teach(Cars);
+                carsForTeaching.Add(Cars[(int)index]);
+            }
+
+            //MessageBox.Show("Выбрано " + carsForTeaching.Count + " авто для обучения.");
+
+            double err = networkTeacher.Teach(carsForTeaching);
+
+            double tmp = Convert.ToDouble(e.Argument);
+            while (err > tmp)
+            {
+                err = networkTeacher.Teach(carsForTeaching);
                 iterations++;
+                backgroundWorker1.ReportProgress((int)err, "error");
             }
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             GetClassButton.Enabled = true;
-
             ResultTeachingLabel.Text = "Количество итераций для обучения:  " + iterations;
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            if (e.ProgressPercentage < (100 + trackBar1.Value))
+            {
+                progressBar1.Value = (int)((100 + trackBar1.Value) - Math.Max(trackBar1.Value, e.ProgressPercentage));
+            }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            backgroundWorker1.Dispose();
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            SumErrorLabel.Text = trackBar1.Value + "%";
         }
 
 

@@ -34,8 +34,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.Normalize = new System.Windows.Forms.CheckBox();
             this.NotNormalize = new System.Windows.Forms.CheckBox();
-            this.LoadButton = new System.Windows.Forms.Button();
-            this.SaveButton = new System.Windows.Forms.Button();
             this.AddCarButton = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.TypeAutoComboBox = new System.Windows.Forms.ComboBox();
@@ -58,21 +56,27 @@
             this.WeightTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.CarNametextBox = new System.Windows.Forms.TextBox();
+            this.LoadButton = new System.Windows.Forms.Button();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.TeachButton = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.CarsChekedBox = new System.Windows.Forms.CheckedListBox();
-            this.GetClassButton = new System.Windows.Forms.Button();
-            this.SelectedFile = new System.Windows.Forms.ComboBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.ResultTeachingLabel = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.GetClassButton = new System.Windows.Forms.Button();
+            this.CarsChekedBox = new System.Windows.Forms.CheckedListBox();
+            this.TeachButton = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.ErrorLabel = new System.Windows.Forms.Label();
+            this.SumErrorLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CarTable)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -92,7 +96,6 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage1.Controls.Add(this.SelectedFile);
             this.tabPage1.Controls.Add(this.CarTable);
             this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Controls.Add(this.LoadButton);
@@ -176,26 +179,6 @@
             this.NotNormalize.Text = "Данные в \"понятном\" виде";
             this.NotNormalize.UseVisualStyleBackColor = true;
             this.NotNormalize.CheckedChanged += new System.EventHandler(this.NotNormalize_CheckedChanged);
-            // 
-            // LoadButton
-            // 
-            this.LoadButton.Location = new System.Drawing.Point(489, 646);
-            this.LoadButton.Name = "LoadButton";
-            this.LoadButton.Size = new System.Drawing.Size(128, 30);
-            this.LoadButton.TabIndex = 23;
-            this.LoadButton.Text = "Загрузить из";
-            this.LoadButton.UseVisualStyleBackColor = true;
-            this.LoadButton.Click += new System.EventHandler(this.LoadButton_Click);
-            // 
-            // SaveButton
-            // 
-            this.SaveButton.Location = new System.Drawing.Point(337, 646);
-            this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(128, 30);
-            this.SaveButton.TabIndex = 22;
-            this.SaveButton.Text = "Cохранить в ";
-            this.SaveButton.UseVisualStyleBackColor = true;
-            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // AddCarButton
             // 
@@ -418,8 +401,32 @@
             this.CarNametextBox.Tag = "";
             this.CarNametextBox.Enter += new System.EventHandler(this.CarNametextBox_Enter);
             // 
+            // LoadButton
+            // 
+            this.LoadButton.Location = new System.Drawing.Point(151, 646);
+            this.LoadButton.Name = "LoadButton";
+            this.LoadButton.Size = new System.Drawing.Size(128, 35);
+            this.LoadButton.TabIndex = 23;
+            this.LoadButton.Text = "Загрузить";
+            this.LoadButton.UseVisualStyleBackColor = true;
+            this.LoadButton.Click += new System.EventHandler(this.LoadButton_Click);
+            // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(17, 646);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(128, 35);
+            this.SaveButton.TabIndex = 22;
+            this.SaveButton.Text = "Cохранить";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.SumErrorLabel);
+            this.tabPage2.Controls.Add(this.ErrorLabel);
+            this.tabPage2.Controls.Add(this.trackBar1);
+            this.tabPage2.Controls.Add(this.progressBar1);
             this.tabPage2.Controls.Add(this.ResultTeachingLabel);
             this.tabPage2.Controls.Add(this.panel2);
             this.tabPage2.Controls.Add(this.TeachButton);
@@ -429,6 +436,62 @@
             this.tabPage2.Size = new System.Drawing.Size(1084, 700);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Работа с сетью";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(208, 17);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(851, 46);
+            this.progressBar1.TabIndex = 5;
+            // 
+            // ResultTeachingLabel
+            // 
+            this.ResultTeachingLabel.AutoSize = true;
+            this.ResultTeachingLabel.Location = new System.Drawing.Point(707, 91);
+            this.ResultTeachingLabel.Name = "ResultTeachingLabel";
+            this.ResultTeachingLabel.Size = new System.Drawing.Size(195, 13);
+            this.ResultTeachingLabel.TabIndex = 4;
+            this.ResultTeachingLabel.Text = "Количество итераций для обучения:  ";
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.listBox1);
+            this.panel2.Controls.Add(this.GetClassButton);
+            this.panel2.Controls.Add(this.CarsChekedBox);
+            this.panel2.Location = new System.Drawing.Point(20, 142);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1039, 540);
+            this.panel2.TabIndex = 3;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(417, 27);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(603, 407);
+            this.listBox1.TabIndex = 2;
+            // 
+            // GetClassButton
+            // 
+            this.GetClassButton.Cursor = System.Windows.Forms.Cursors.Default;
+            this.GetClassButton.Enabled = false;
+            this.GetClassButton.Location = new System.Drawing.Point(14, 457);
+            this.GetClassButton.Name = "GetClassButton";
+            this.GetClassButton.Size = new System.Drawing.Size(386, 47);
+            this.GetClassButton.TabIndex = 1;
+            this.GetClassButton.Text = "Спросить";
+            this.GetClassButton.UseVisualStyleBackColor = true;
+            this.GetClassButton.Click += new System.EventHandler(this.GetClassButton_Click);
+            // 
+            // CarsChekedBox
+            // 
+            this.CarsChekedBox.CheckOnClick = true;
+            this.CarsChekedBox.FormattingEnabled = true;
+            this.CarsChekedBox.Location = new System.Drawing.Point(14, 27);
+            this.CarsChekedBox.Name = "CarsChekedBox";
+            this.CarsChekedBox.Size = new System.Drawing.Size(386, 409);
+            this.CarsChekedBox.TabIndex = 0;
             // 
             // TeachButton
             // 
@@ -440,69 +503,41 @@
             this.TeachButton.UseVisualStyleBackColor = true;
             this.TeachButton.Click += new System.EventHandler(this.TeachButton_Click);
             // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.listBox1);
-            this.panel2.Controls.Add(this.GetClassButton);
-            this.panel2.Controls.Add(this.CarsChekedBox);
-            this.panel2.Location = new System.Drawing.Point(20, 91);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1039, 591);
-            this.panel2.TabIndex = 3;
-            // 
-            // CarsChekedBox
-            // 
-            this.CarsChekedBox.CheckOnClick = true;
-            this.CarsChekedBox.FormattingEnabled = true;
-            this.CarsChekedBox.Location = new System.Drawing.Point(14, 27);
-            this.CarsChekedBox.Name = "CarsChekedBox";
-            this.CarsChekedBox.Size = new System.Drawing.Size(386, 484);
-            this.CarsChekedBox.TabIndex = 0;
-            // 
-            // GetClassButton
-            // 
-            this.GetClassButton.Enabled = false;
-            this.GetClassButton.Location = new System.Drawing.Point(14, 530);
-            this.GetClassButton.Name = "GetClassButton";
-            this.GetClassButton.Size = new System.Drawing.Size(386, 47);
-            this.GetClassButton.TabIndex = 1;
-            this.GetClassButton.Text = "Спросить";
-            this.GetClassButton.UseVisualStyleBackColor = true;
-            this.GetClassButton.Click += new System.EventHandler(this.GetClassButton_Click);
-            // 
-            // SelectedFile
-            // 
-            this.SelectedFile.FormattingEnabled = true;
-            this.SelectedFile.Items.AddRange(new object[] {
-            "Учебная выборка",
-            "Тестовая выборка"});
-            this.SelectedFile.Location = new System.Drawing.Point(633, 652);
-            this.SelectedFile.Name = "SelectedFile";
-            this.SelectedFile.Size = new System.Drawing.Size(438, 21);
-            this.SelectedFile.TabIndex = 24;
-            // 
-            // ResultTeachingLabel
-            // 
-            this.ResultTeachingLabel.AutoSize = true;
-            this.ResultTeachingLabel.Location = new System.Drawing.Point(222, 34);
-            this.ResultTeachingLabel.Name = "ResultTeachingLabel";
-            this.ResultTeachingLabel.Size = new System.Drawing.Size(195, 13);
-            this.ResultTeachingLabel.TabIndex = 4;
-            this.ResultTeachingLabel.Text = "Количество итераций для обучения:  ";
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(417, 27);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(365, 550);
-            this.listBox1.TabIndex = 2;
-            // 
             // backgroundWorker1
             // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(224, 91);
+            this.trackBar1.Maximum = 12;
+            this.trackBar1.Minimum = 3;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(144, 45);
+            this.trackBar1.TabIndex = 6;
+            this.trackBar1.Value = 5;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // ErrorLabel
+            // 
+            this.ErrorLabel.AutoSize = true;
+            this.ErrorLabel.Location = new System.Drawing.Point(20, 91);
+            this.ErrorLabel.Name = "ErrorLabel";
+            this.ErrorLabel.Size = new System.Drawing.Size(198, 13);
+            this.ErrorLabel.TabIndex = 7;
+            this.ErrorLabel.Text = "Возможная суммарная погрешность ";
+            // 
+            // SumErrorLabel
+            // 
+            this.SumErrorLabel.AutoSize = true;
+            this.SumErrorLabel.Location = new System.Drawing.Point(380, 91);
+            this.SumErrorLabel.Name = "SumErrorLabel";
+            this.SumErrorLabel.Size = new System.Drawing.Size(21, 13);
+            this.SumErrorLabel.TabIndex = 8;
+            this.SumErrorLabel.Text = "5%";
             // 
             // Form1
             // 
@@ -515,6 +550,7 @@
             this.MinimumSize = new System.Drawing.Size(1130, 793);
             this.Name = "Form1";
             this.Text = "Neural Network";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -524,6 +560,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -565,10 +602,13 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button GetClassButton;
         private System.Windows.Forms.CheckedListBox CarsChekedBox;
-        private System.Windows.Forms.ComboBox SelectedFile;
         private System.Windows.Forms.Label ResultTeachingLabel;
         private System.Windows.Forms.ListBox listBox1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label SumErrorLabel;
+        private System.Windows.Forms.Label ErrorLabel;
     }
 }
 

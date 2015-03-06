@@ -21,14 +21,13 @@ namespace NeuralNetwork
         /// <returns>Значение активационной функции</returns>
         public double Function(double x)
         {
-            //return (x >= 0) ? 1 : 0;
             if (x > Threshold)
             {
-                return 1;
+                return Math.Min(Math.Round(x, 2), 1);
             }
             else
             {
-                return 0;
+                return Math.Max(0, Math.Round(x, 2));
             }
         }
 
