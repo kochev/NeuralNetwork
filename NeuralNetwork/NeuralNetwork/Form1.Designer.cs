@@ -70,6 +70,8 @@
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.ErrorLabel = new System.Windows.Forms.Label();
             this.SumErrorLabel = new System.Windows.Forms.Label();
+            this.SaveNetworkButton = new System.Windows.Forms.Button();
+            this.LoadNetworkButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CarTable)).BeginInit();
@@ -456,6 +458,8 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.LoadNetworkButton);
+            this.panel2.Controls.Add(this.SaveNetworkButton);
             this.panel2.Controls.Add(this.listBox1);
             this.panel2.Controls.Add(this.GetClassButton);
             this.panel2.Controls.Add(this.CarsChekedBox);
@@ -475,7 +479,6 @@
             // GetClassButton
             // 
             this.GetClassButton.Cursor = System.Windows.Forms.Cursors.Default;
-            this.GetClassButton.Enabled = false;
             this.GetClassButton.Location = new System.Drawing.Point(14, 457);
             this.GetClassButton.Name = "GetClassButton";
             this.GetClassButton.Size = new System.Drawing.Size(386, 47);
@@ -514,7 +517,7 @@
             // 
             this.trackBar1.Location = new System.Drawing.Point(224, 91);
             this.trackBar1.Maximum = 12;
-            this.trackBar1.Minimum = 3;
+            this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(144, 45);
             this.trackBar1.TabIndex = 6;
@@ -538,6 +541,26 @@
             this.SumErrorLabel.Size = new System.Drawing.Size(21, 13);
             this.SumErrorLabel.TabIndex = 8;
             this.SumErrorLabel.Text = "5%";
+            // 
+            // SaveNetworkButton
+            // 
+            this.SaveNetworkButton.Location = new System.Drawing.Point(417, 457);
+            this.SaveNetworkButton.Name = "SaveNetworkButton";
+            this.SaveNetworkButton.Size = new System.Drawing.Size(271, 47);
+            this.SaveNetworkButton.TabIndex = 3;
+            this.SaveNetworkButton.Text = "Сохранить сеть";
+            this.SaveNetworkButton.UseVisualStyleBackColor = true;
+            this.SaveNetworkButton.Click += new System.EventHandler(this.SaveNetworkButton_Click);
+            // 
+            // LoadNetworkButton
+            // 
+            this.LoadNetworkButton.Location = new System.Drawing.Point(749, 457);
+            this.LoadNetworkButton.Name = "LoadNetworkButton";
+            this.LoadNetworkButton.Size = new System.Drawing.Size(271, 47);
+            this.LoadNetworkButton.TabIndex = 4;
+            this.LoadNetworkButton.Text = "Загрузить сеть";
+            this.LoadNetworkButton.UseVisualStyleBackColor = true;
+            this.LoadNetworkButton.Click += new System.EventHandler(this.LoadNetworkButton_Click);
             // 
             // Form1
             // 
@@ -609,6 +632,8 @@
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label SumErrorLabel;
         private System.Windows.Forms.Label ErrorLabel;
+        private System.Windows.Forms.Button LoadNetworkButton;
+        private System.Windows.Forms.Button SaveNetworkButton;
     }
 }
 

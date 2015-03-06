@@ -1,8 +1,12 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.Xml.Serialization;
 
 namespace NeuralNetwork
 {
-    class Network
+    [XmlInclude(typeof (Network))]
+    [Serializable]
+    public class Network
     {
         /// <summary>
         /// Количество входных параметров для сети
@@ -45,6 +49,10 @@ namespace NeuralNetwork
             {
                 Layers[i] = new Layer(neurons, InputsCount);
             }
+        }
+
+        public Network()
+        {
         }
 
 

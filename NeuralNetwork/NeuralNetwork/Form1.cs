@@ -237,6 +237,16 @@ namespace NeuralNetwork
             SumErrorLabel.Text = trackBar1.Value + "%";
         }
 
+        private void SaveNetworkButton_Click(object sender, EventArgs e)
+        {
+            _xmlWorker.Serialize(_network, "Network.xml", typeof(Network));
+        }
+
+        private void LoadNetworkButton_Click(object sender, EventArgs e)
+        {
+            _network = (Network)_xmlWorker.Deserialize("Network.xml", typeof(Network));
+        }
+
 
 
     }

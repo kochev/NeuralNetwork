@@ -33,6 +33,11 @@ namespace NeuralNetwork
             Randomize();
         }
 
+
+        public Neuron()
+        {
+        }
+
         /// <summary>
         /// Рандомизация весов нейрона
         /// </summary>

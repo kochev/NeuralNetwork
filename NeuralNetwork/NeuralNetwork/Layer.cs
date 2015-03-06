@@ -1,6 +1,6 @@
 ﻿namespace NeuralNetwork
 {
-    class Layer
+    public class Layer
     {
         /// <summary>
         /// Количество входных параметров для слоя
@@ -42,6 +42,9 @@
             Outputs = new double[NeuronsCount];
         }
 
+        public Layer()
+        {
+        }
 
         /// <summary>
         /// Рандомизация нейронов слоя

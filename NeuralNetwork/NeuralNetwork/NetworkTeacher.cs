@@ -54,7 +54,7 @@ namespace NeuralNetwork
                 //разность между реальным выходом сети и желаемым выходом
                 double err = outputs[i] - networkOutput[i];
 
-                if (Math.Abs(err) > 0.01)
+                if (Math.Abs(err) > 0.0001)
                 {
                     //возьмем нейрон который дал нехороший ответ
                     Neuron neuron = layer.Neurons[i];
