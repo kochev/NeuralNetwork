@@ -61,6 +61,7 @@ namespace NeuralNetwork
         private void SaveButton_Click(object sender, EventArgs e)
         {
             _xmlWorker.Serialize(Cars, "CarsForStudy.xml", typeof(List<Car>));
+            LoadButton_Click(null, null);
         }
 
         private void LoadButton_Click(object sender, EventArgs e)
@@ -73,7 +74,6 @@ namespace NeuralNetwork
             CarTable.DataSource = Cars;
             foreach (var car in Cars)
             {
-
                 CarsChekedBox.Items.Add(car.ToString());
             }
         }
@@ -182,7 +182,10 @@ namespace NeuralNetwork
                 string resultString = car.Name + ":";
                 for (int i = 0; i < output.Length; i++)
                 {
-                    resultString += " " + types[i] + "(" + output[i] * 100 + " %)";
+                    if (output[i] != 0)
+                    {
+                        resultString += " " + types[i] + "(" + output[i] * 100 + " %)";
+                    }
                 }
                 listBox1.Items.Add(resultString);
             }
@@ -209,7 +212,7 @@ namespace NeuralNetwork
             {
                 err = networkTeacher.Teach(carsForTeaching);
                 iterations++;
-                backgroundWorker1.ReportProgress((int)err, "error");
+                //backgroundWorker1.ReportProgress((int)err, "error");
             }
         }
 
@@ -221,9 +224,10 @@ namespace NeuralNetwork
 
         private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
-            if (e.ProgressPercentage < (100 + trackBar1.Value))
+            if (e.ProgressPercentage < 10 + trackBar1.Value)//e.ProgressPercentage < (10 + trackBar1.Value) &&
             {
-                progressBar1.Value = (int)((100 + trackBar1.Value) - Math.Max(trackBar1.Value, e.ProgressPercentage));
+                //label11.Text = ((int)((10 + trackBar1.Value) - Math.Max(trackBar1.Value, e.ProgressPercentage)) * 10).ToString();
+                progressBar1.Value = (int)((10 + trackBar1.Value) - Math.Max(trackBar1.Value, e.ProgressPercentage));
             }
         }
 
@@ -245,6 +249,7 @@ namespace NeuralNetwork
         private void LoadNetworkButton_Click(object sender, EventArgs e)
         {
             _network = (Network)_xmlWorker.Deserialize("Network.xml", typeof(Network));
+            SaveNetworkButton.Enabled = true;
         }
 
 

@@ -54,7 +54,7 @@ namespace NeuralNetwork
                 //разность между реальным выходом сети и желаемым выходом
                 double err = outputs[i] - networkOutput[i];
 
-                if (Math.Abs(err) > 0.0001)
+                if (Math.Abs(err) > 0.000000001)
                 {
                     //возьмем нейрон который дал нехороший ответ
                     Neuron neuron = layer.Neurons[i];
@@ -70,7 +70,6 @@ namespace NeuralNetwork
                     error += Math.Abs(err);
                 }
             }
-            // Debug.Print("Error:" + error.ToString());
             return error;
         }
 
@@ -78,7 +77,7 @@ namespace NeuralNetwork
         /// <summary>
         /// Обучение на множестве примеров
         /// </summary>
-        /// <param name="c">Авто для обучения сети</param>
+        /// <param name="cars">Авто для обучения сети</param>
         /// <returns>Суммарная ошибка при обучении</returns>
         public double Teach(List<Car> cars)
         {

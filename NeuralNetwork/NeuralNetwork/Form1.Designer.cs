@@ -59,26 +59,27 @@
             this.LoadButton = new System.Windows.Forms.Button();
             this.SaveButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.SumErrorLabel = new System.Windows.Forms.Label();
+            this.ErrorLabel = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.ResultTeachingLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.LoadNetworkButton = new System.Windows.Forms.Button();
+            this.SaveNetworkButton = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.GetClassButton = new System.Windows.Forms.Button();
             this.CarsChekedBox = new System.Windows.Forms.CheckedListBox();
             this.TeachButton = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.ErrorLabel = new System.Windows.Forms.Label();
-            this.SumErrorLabel = new System.Windows.Forms.Label();
-            this.SaveNetworkButton = new System.Windows.Forms.Button();
-            this.LoadNetworkButton = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CarTable)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -425,6 +426,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Controls.Add(this.SumErrorLabel);
             this.tabPage2.Controls.Add(this.ErrorLabel);
             this.tabPage2.Controls.Add(this.trackBar1);
@@ -439,9 +441,39 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Работа с сетью";
             // 
+            // SumErrorLabel
+            // 
+            this.SumErrorLabel.AutoSize = true;
+            this.SumErrorLabel.Location = new System.Drawing.Point(380, 91);
+            this.SumErrorLabel.Name = "SumErrorLabel";
+            this.SumErrorLabel.Size = new System.Drawing.Size(21, 13);
+            this.SumErrorLabel.TabIndex = 8;
+            this.SumErrorLabel.Text = "5%";
+            // 
+            // ErrorLabel
+            // 
+            this.ErrorLabel.AutoSize = true;
+            this.ErrorLabel.Location = new System.Drawing.Point(20, 91);
+            this.ErrorLabel.Name = "ErrorLabel";
+            this.ErrorLabel.Size = new System.Drawing.Size(198, 13);
+            this.ErrorLabel.TabIndex = 7;
+            this.ErrorLabel.Text = "Возможная суммарная погрешность ";
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.LargeChange = 3;
+            this.trackBar1.Location = new System.Drawing.Point(224, 91);
+            this.trackBar1.Maximum = 15;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(144, 45);
+            this.trackBar1.TabIndex = 6;
+            this.trackBar1.Value = 5;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(208, 17);
+            this.progressBar1.Maximum = 10;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(851, 46);
             this.progressBar1.TabIndex = 5;
@@ -467,6 +499,27 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1039, 540);
             this.panel2.TabIndex = 3;
+            // 
+            // LoadNetworkButton
+            // 
+            this.LoadNetworkButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LoadNetworkButton.Location = new System.Drawing.Point(749, 457);
+            this.LoadNetworkButton.Name = "LoadNetworkButton";
+            this.LoadNetworkButton.Size = new System.Drawing.Size(271, 47);
+            this.LoadNetworkButton.TabIndex = 4;
+            this.LoadNetworkButton.Text = "Загрузить сеть";
+            this.LoadNetworkButton.UseVisualStyleBackColor = true;
+            this.LoadNetworkButton.Click += new System.EventHandler(this.LoadNetworkButton_Click);
+            // 
+            // SaveNetworkButton
+            // 
+            this.SaveNetworkButton.Location = new System.Drawing.Point(417, 457);
+            this.SaveNetworkButton.Name = "SaveNetworkButton";
+            this.SaveNetworkButton.Size = new System.Drawing.Size(271, 47);
+            this.SaveNetworkButton.TabIndex = 3;
+            this.SaveNetworkButton.Text = "Сохранить сеть";
+            this.SaveNetworkButton.UseVisualStyleBackColor = true;
+            this.SaveNetworkButton.Click += new System.EventHandler(this.SaveNetworkButton_Click);
             // 
             // listBox1
             // 
@@ -513,54 +566,16 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // trackBar1
+            // label11
             // 
-            this.trackBar1.Location = new System.Drawing.Point(224, 91);
-            this.trackBar1.Maximum = 12;
-            this.trackBar1.Minimum = 1;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(144, 45);
-            this.trackBar1.TabIndex = 6;
-            this.trackBar1.Value = 5;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            // 
-            // ErrorLabel
-            // 
-            this.ErrorLabel.AutoSize = true;
-            this.ErrorLabel.Location = new System.Drawing.Point(20, 91);
-            this.ErrorLabel.Name = "ErrorLabel";
-            this.ErrorLabel.Size = new System.Drawing.Size(198, 13);
-            this.ErrorLabel.TabIndex = 7;
-            this.ErrorLabel.Text = "Возможная суммарная погрешность ";
-            // 
-            // SumErrorLabel
-            // 
-            this.SumErrorLabel.AutoSize = true;
-            this.SumErrorLabel.Location = new System.Drawing.Point(380, 91);
-            this.SumErrorLabel.Name = "SumErrorLabel";
-            this.SumErrorLabel.Size = new System.Drawing.Size(21, 13);
-            this.SumErrorLabel.TabIndex = 8;
-            this.SumErrorLabel.Text = "5%";
-            // 
-            // SaveNetworkButton
-            // 
-            this.SaveNetworkButton.Location = new System.Drawing.Point(417, 457);
-            this.SaveNetworkButton.Name = "SaveNetworkButton";
-            this.SaveNetworkButton.Size = new System.Drawing.Size(271, 47);
-            this.SaveNetworkButton.TabIndex = 3;
-            this.SaveNetworkButton.Text = "Сохранить сеть";
-            this.SaveNetworkButton.UseVisualStyleBackColor = true;
-            this.SaveNetworkButton.Click += new System.EventHandler(this.SaveNetworkButton_Click);
-            // 
-            // LoadNetworkButton
-            // 
-            this.LoadNetworkButton.Location = new System.Drawing.Point(749, 457);
-            this.LoadNetworkButton.Name = "LoadNetworkButton";
-            this.LoadNetworkButton.Size = new System.Drawing.Size(271, 47);
-            this.LoadNetworkButton.TabIndex = 4;
-            this.LoadNetworkButton.Text = "Загрузить сеть";
-            this.LoadNetworkButton.UseVisualStyleBackColor = true;
-            this.LoadNetworkButton.Click += new System.EventHandler(this.LoadNetworkButton_Click);
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.Cursor = System.Windows.Forms.Cursors.Default;
+            this.label11.Location = new System.Drawing.Point(625, 34);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(21, 13);
+            this.label11.TabIndex = 9;
+            this.label11.Text = "0%";
             // 
             // Form1
             // 
@@ -582,8 +597,8 @@
             this.panel1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -634,6 +649,7 @@
         private System.Windows.Forms.Label ErrorLabel;
         private System.Windows.Forms.Button LoadNetworkButton;
         private System.Windows.Forms.Button SaveNetworkButton;
+        private System.Windows.Forms.Label label11;
     }
 }
 

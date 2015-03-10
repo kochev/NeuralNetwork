@@ -80,7 +80,6 @@ namespace NeuralNetwork
             foreach (var layer in Layers)
             {
                 Outputs = layer.Compute(input);
-                //Debug.Print(Outputs[0] + "-" + Outputs[1] + "-" + Outputs[2] + "-" + Outputs[3]);
             }
 
             return Outputs;

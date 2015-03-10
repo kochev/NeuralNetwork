@@ -23,11 +23,13 @@ namespace NeuralNetwork
         {
             if (x > Threshold)
             {
-                return Math.Min(Math.Round(x, 2), 1);
+                return 1;//Math.Min(Math.Round(x, 2), 1);
+                //return Math.Min(Math.Round(x, 2), 1);
             }
             else
             {
-                return Math.Max(0, Math.Round(x, 2));
+                return 0;
+               // return Math.Max(0, Math.Round(x, 2));
             }
         }
 

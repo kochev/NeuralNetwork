@@ -69,10 +69,8 @@ namespace NeuralNetwork
             {
                 sum += Weights[i] * inputs[i];
             }
-            //Debug.Print(sum.ToString());
-            //sum += Threshold;
 
-            Output = new ThresholdActivationFunction(0.9).Function(sum);
+            Output = new ThresholdActivationFunction(0.95).Function(sum);
             return Output;
         }
     }
